@@ -2,14 +2,19 @@
 session_start();
 require_once '../classes/UserLogic.php';
 
+if (!$logout = filter_input(INPUT_POST,'logout'))
+{
+    exit('不正なリクエストです');
+}
+
 $result = UserLogic::checkLogin();
 
 if (!$result)
 {
-    $_SESSION['login_err'] = 'ユーザーを登録してログインしてください';
-    header('Location:signup.php');
-    return;
+    exit('セッションが切れましたので、再度ログインしてください');
 }
+
+UserLogic::logout();
 
 ?>
 <!DOCTYPE html>
@@ -22,5 +27,6 @@ if (!$result)
 <body>
 <h2>ログアウト</h2>
 <p>ログアウト完了しました</p>
+<a href="login_form.php">ログイン画面へ</a>
 </body>
 </html>

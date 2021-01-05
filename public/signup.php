@@ -47,6 +47,7 @@ unset($_SESSION['login_err']);
     <p>
         <input type="submit" value="新規登録">
     </p>
+    <a href="login_form.php">ログインする</a>
 </form>
 </body>
 </html>
